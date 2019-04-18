@@ -1,6 +1,6 @@
-// production config
-const merge = require("webpack-merge");
 const { resolve } = require("path");
+const merge = require("webpack-merge");
+
 
 const commonConfig = require("./common");
 
