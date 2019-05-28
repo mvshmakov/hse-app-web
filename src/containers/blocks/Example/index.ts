@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { exampleAction } from "@/actions/example";
 import ExampleBlock from "@/components/blocks/Example";
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
     bindActionCreators({ exampleAction }, dispatch);
 
 export default connect(

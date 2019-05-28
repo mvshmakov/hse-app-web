@@ -1,14 +1,5 @@
 import * as React from "react";
-import {
-    Search,
-    PanelHeader,
-    Panel,
-    Group,
-    List,
-    Cell,
-    Div,
-    HeaderButton
-} from "@vkontakte/vkui";
+import { Search, PanelHeader, Panel, Group, List, Div } from "@vkontakte/vkui";
 import PanelSpinner from "@vkontakte/vkui/dist/components/PanelSpinner/PanelSpinner";
 import "@vkontakte/vkui/dist/vkui.css";
 
@@ -20,7 +11,6 @@ import "./styles.scss";
 
 const THROTTLE_DELAY: number = 100;
 
-// import exact types
 export interface IActionsProps {
     searchUserAction: (...args: any[]) => any;
 }
@@ -30,7 +20,8 @@ export interface IStateProps {
 }
 interface IProps {
     id: string;
-    onSelectUser: () => void;
+    type: "group" | "general";
+    onSelectUser: () => any;
 }
 
 interface IState {
@@ -66,14 +57,31 @@ export default class SearchPanel extends PurePanel<
             username
         );
 
-        this.setState({
-            username,
-            timerId
-        });
+        this.setState({ username, timerId });
     };
 
     render() {
         const { id, loading, onSelectUser } = this.props;
+
+        const children = loading ? (
+            <PanelSpinner />
+        ) : (
+            <List>
+                {this.users.length !== 0 &&
+                    this.users.map(({ id, label }) => {
+                        return (
+                            <UserSnippetBlock
+                                key={id}
+                                userId={id}
+                                entity="student"
+                                title={label}
+                                description="Тестовое описание"
+                                onClick={onSelectUser}
+                            />
+                        );
+                    })}
+            </List>
+        );
 
         return (
             <Panel id={id}>
@@ -86,24 +94,7 @@ export default class SearchPanel extends PurePanel<
                             преподавателя, номер аудитории
                         </Div>
                     )}
-                    {loading ? (
-                        <PanelSpinner />
-                    ) : (
-                        <List>
-                            {this.users.length !== 0 &&
-                                this.users.map(({ _id, label }) => {
-                                    return (
-                                        <UserSnippetBlock
-                                            key={_id}
-                                            entity="student"
-                                            title={label}
-                                            description="Тестовое описание"
-                                            onClick={onSelectUser}
-                                        />
-                                    );
-                                })}
-                        </List>
-                    )}
+                    {this.state.username && children}
                 </Group>
             </Panel>
         );

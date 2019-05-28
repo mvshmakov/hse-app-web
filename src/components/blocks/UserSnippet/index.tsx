@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Group, Cell } from "@vkontakte/vkui";
+import { Cell } from "@vkontakte/vkui";
 import Icon24Users from "@vkontakte/icons/dist/24/users";
 import "@vkontakte/vkui/dist/vkui.css";
 
@@ -11,6 +11,7 @@ type IEntity = "student" | "group";
 interface IProps {
     entity: IEntity;
     title: string;
+    userId: number;
     description: string;
     onClick: (...args: any[]) => any;
 }
@@ -26,6 +27,7 @@ const iconPicker = (entity: IEntity) => {
 
 const UserSnippetBlock: IFunctionalBlock<IProps> = ({
     entity = "student",
+    userId = 123,
     title = "",
     description = "",
     onClick

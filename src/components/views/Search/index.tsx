@@ -21,7 +21,7 @@ export default class SearchView extends PureView<IProps, IState> {
     };
 
     changePanel(activePanel: string) {
-        return (...args) => {
+        return () => {
             this.setState({ activePanel });
         };
     }
@@ -31,6 +31,7 @@ export default class SearchView extends PureView<IProps, IState> {
             <View id={this.props.id} activePanel={this.state.activePanel}>
                 <SearchPanel
                     id="search"
+                    type="general"
                     onSelectUser={this.changePanel("example")}
                 />
                 <ExamplePanel
