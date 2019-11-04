@@ -14,6 +14,6 @@ export default (history) => combineReducers({
     users,
     user,
     group,
-    initial,
+    account: initial,
     router: connectRouter(history),
 });

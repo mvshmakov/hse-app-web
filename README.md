@@ -9,4 +9,6 @@
 https://github.com/AZbang/vk_app
 http://projects.wojtekmaj.pl/react-calendar/
 
+Документация по API: https://wiki.yandex.ru/users/ashinkarev/docs/
+
 Префиксуем типы через T, интерфейсы через I
